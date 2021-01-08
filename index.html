@@ -1,0 +1,694 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset='utf-8'>
+<title>Cellular Automata</title>
+    
+<link href="css/site.css" media="all" rel="stylesheet" type="text/css" />
+<link href="css/highlight.default.css" media="all" rel="stylesheet" type="text/css" />
+  
+<script src="js/jquery.js"></script>
+<script src="js/showdown.js" type="text/javascript"></script>
+
+<link rel="icon" type="image/x-icon" href="favicon.ico" />
+</head>
+<body>
+<!--
+Write the markdown code below.
+A guide to markdown syntax is at http://daringfireball.net/projects/markdown/
+-->
+
+<div style="display: none" id="sourcetext">
+
+# Cellular Automata 
+## How life can emerge from non-life?
+
+It is a question upon which science can only speculate, as we have no readily available examples of the spontaneous emergence of life for empirical study. However the problem can be approached more generally as the modeling of the emergence of complex structures which evoke life-like characteristics, from simpler dynamic substrates.
+
+***Autonomous Complexity in Life and Machines:*** the CA model was propsed by Stanislaw Ulam and used by [von Neumann](https://en.wikipedia.org/wiki/Von_Neumann_universal_constructor) -- in the 1940's -- to demonstrate machines that can reproduce themselves. A CA is a discrete model in time, space, and cell states, making it immediately suitable for computational simulation.
+
+The world of a Cellular Automata is a grid of cells (in one, two, or more dimensions), each of which can be in one or another state (e.g. white or black), and which follows simple rules to change its state according to the states of its immediate neighbors.
+
+## Schedule
+1. CA Context.  
+2. Explorations of Cellular Automata using P5.js 
+	- Launch.  
+	- Conway’s Game of Life.  
+	- Langton's Ant.  
+3. Q&A, further discusion.	
+
+## Requirement
+Laptop & notbook.
+
+_____________________________
+
+# Conway's Game of Life, 1970
+## Introduction
+- [Stephen Hawkings The Meaning of Life (John Conway's Game of Life segment), 3:29](https://www.youtube.com/watch?v=CgOcEZinQ2I&t=2s)  
+
+- [Does John Conway hate his Game of Life?, 6:53](https://www.youtube.com/watch?v=E8kUJL04ELA&feature=youtu.be) 	
+	
+## Rule
+
+The most famous CA is probably the Game of Life. It is a 2D automata, which uses a neighbourhood of 8 neighbours, and synchronous update. The transition rule can be stated as follows:
+
+- If the current state is 1 ("alive"):
+	- If the neighbor total is less than 2: New state is 0 ("death by loneliness")
+	- Else if the neighbor total is greater than 3: New state is 0 ("death by overcrowding")
+	- Else: State remains the same ("alive")
+- If the current state is 0 ("dead"):
+	- If the neigbor total is exactly 3: New state is 1 ("reproduction")
+	- Else: State remains the same ("dead")
+	
+The Game of Life produces easily recognizable higher-level formations including stable objects, oscillatory objects, mobile objects and objects that produce or consume others, for example, which have been called 'ponds', 'gliders', 'eaters', 'glider guns' and so on. 	
+
+## Essential components
+The essential components that define a cellular system are:
+
+- **Cellular space:** A collection of cells arranged into a discrete lattice, such as a 2D grid. The space is usually 1D, 2D or 3D, but rarely greater. 
+
+- **Cell states:** The information representing the current condition of a cell. In binary CAs this is simply either 0 or 1.
+
+- **Initial conditions:** What state the cells are in at the start of the simulation.
+
+- **Neighborhood:** The set of adjacent/nearby cells that can directly influence the next state of a cell. The most common 2D neighborhoods are: 
+
+	![neighborhoods](http://www.economicsnetwork.ac.uk/cheer/ch17/hand1.gif)
+
+- **State transition function:** The rule that a cell follows to update its state, which depends on the current state and the state of the neighborhood. It gives the cell state[t+1] as a function of the states[t] of itself and neighbours. 
+
+	The transition rule always reads from the 'past' lattice, and always writes to the 'future' lattice. After all cells are updated, either the 'future' is copied to the 'past', or the 'future' and 'past' lattices are swapped, since the future of yesterday is the past of tomorrow. 
+
+- **Time axis:** The cells are generally updated in a discrete fashion, which may be synchronous (all cells update simultaneously) or asynchronous (cells update sequentially).
+
+- **Boundary conditions:** What happens to cells at the edges of the space. A periodic boundary 'wraps around' to the opposite edge; a static boundary always has the same state, a reflective boundary mirrors the neighbor state.
+
+## The coding train tutorial
+
+- [The Game of Life - The Nature of Code by The coding train.](https://www.youtube.com/watch?v=tENSCEO-LEc)  	
+	
+> The spatial directions of cells do not matter, only the total value of all neighbors is used, along with the current value of the cell itself. Note also that these rules mean that the Game of Life is not reversible: from a given state it is not possible to determine the previous state.
+
+# Langton's Ant, 1986
+
+- [Langton's Ant (and Life)](http://datagenetics.com/blog/september22015/index.html)
+
+- [Langton's Ant](http://en.wikipedia.org/wiki/Langton%27s_ant) is a mobile CA in a 2D, two-state space, with very simple rules:
+	- At a white square, turn 90° right, flip the color of the square, move forward one unit
+	- At a black square, turn 90° left, flip the color of the square, move forward one unit
+		
+
+The [original video by Christopher Langton](http://www.youtube.com/watch?v=w6XQQhCgq5c), including examples of multiple ants (and music by the Vasulkas):
+
+Christopher Langton also proposed a more concise self-reproducing CA than von Neumann's, which has since been further improved upon using artificial evolutionary techniques:
+
+- [Langton's Loops, 3:35](https://www.youtube.com/watch?v=2iDc4C6vbcc) 
+
+# Wolfram's Rule 30
+
+Stephen Wolfram, author of Mathematica, performed extensive research on CAs and uncovered general classes of behaviour comparable to dynamical systems. A commonly referenced example is his 'rule 30', which is a 1D CA displayed below as a stacked trace (history goes down) -- whose pattern is reminiscent of some naturally occurring shell patterns:
+
+![Evolution of a 1D CA: rule 30](image/ca_shells.jpg)  
+
+![Rule 30](image/rule30.png)
+
+[Here it is in p5.js](https://codepen.io/Hrrr/pen/MOJmwL?editors=0010)
+
+- [Elementary CA - mathworld.wolfram.com](http://mathworld.wolfram.com/ElementaryCellularAutomaton.html)  
+
+- [Computing a theory of everything | Stephen Wolfram, TED](https://www.youtube.com/watch?v=60P7717-XOQ)  
+
+## Four CA classes
+Wolfram divided CA into four classes, according to their long-term behavior:
+
+- **Class 1:** Evolve to a fixed and homogeneous state.
+- **Class 2:** Evolve to simple periodic configurations (limit cycles).
+- **Class 3:** Evolve to chaotic patterns 
+- **Class 4:** Evolve to complex patterns of localized structures with long transients.  
+ 
+Conway’s Game of Life is a class 4 CA. 
+
+## Bottom-up approach
+The strategy of making possible complex phenomena by the simulation of simple components.
+
+>In a bottom-up approach the individual base elements of the system are first specified in great detail. These elements are then linked together to form larger subsystems, which then in turn are linked, sometimes in many levels, until a complete top-level system is formed. - wikipedia.
+
+# Termites
+
+Mitchel Resnick's termite model is a random walker in a space that can contain woodchips, in which each termite can carry one woodchip at a time. The program for a termite looks something like this:
+
+- Look at the space just in front of me
+- If it is empty, move forward and randomly change direction (random walk)
+- Else if it is occupied by a woodchip:
+	- If I am carrying a wood chip, drop mine where I am and turn around
+	- Else move forward and pick up the woodchip
+	
+Over time, the termites begin to collect the woodchips into small piles, which gradually coalesce into a single large pile of chips.
+
+> Note that Termites and Langton's Ant CAs are closely related to the turtle graphics often used for L-systems,
+
+- [L-Systems - The Nature of Code by the codding train](https://www.youtube.com/watch?v=f6ra024-ASY)  
+
+
+_____________________________
+# Explorations of Cellular Automata using P5.js
+## Launch
+### P5 Editor
+The p5.js Web Editor is an online platform for learning to code in a visual way. Designed for all ages and abilities, anyone can get started quickly creating, editing, and sharing p5.js sketches.  
+It is free and open source, no sign up, setup, or download required. Using p5.js you can use JavaScript, HTML, and CSS to create graphics in 2D and 3D, add text, images, video, and audio, and make your sketch interactive with mouse, touch, webcam input, and motion sensing.  
+
+[p5 editor link](https://editor.p5js.org/)  
+
+### Codepen
+
+CodePen is a playground for the front end side of the web. Need to build a reduced test case to demonstrate and figure out a bug? CodePen is great for that. Want to show off your latest creation and get feedback from your peers? CodePen is great for that. Want to find examples of a particular design pattern for your project? CodePen is great for that. - [codepen.io](https://codepen.io/about/)  
+
+- Let's create an account. [codepen link](https://codepen.io/)
+	
+- Create a new pen. From the setting located at the top right of the screen, you can add P5.js library. Type "p5" and it should offer a full URL for the p5 library, which you can click to select. Then click save & close.
+
+![codepen](image/codepen01.png)  
+
+- Optional: You can check out the latest P5 version from [p5 website](https://cdnjs.com/libraries/p5.js). You can directly copy its address.
+
+>Example - https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.7.2/p5.min.js
+
+- Optional: you can disable Auto-Updating Preview under Behavior in the setting box. The Run button will appear at the top right pannel. (Sometimes auto-updating can be distracting or cause the browser to crash due to an infinite loop while you are typing.)
+
+	- P5 documentation: [https://p5js.org/download/](https://p5js.org/download/)
+	- CODEPEN documentation: [https://blog.codepen.io/documentation/](https://blog.codepen.io/documentation/) 
+	
+- Test coding.
+	- There are three text boxes: HTML, CSS, and JS (JavaScript). Mostly we will only use the JS box to enter code. 
+	- Optional: Add the code below to the CSS box to get rid of scroll bar around your canvas:
+
+```css
+/* these styles remove the space & scrollbars around the canvas */  
+body {margin:0; padding:0;}  
+canvas {display:block;} 		
+```
+
+- Shrink the HTML and CSS boxes to have a bigger space in the JS box. 
+- Test to write the simplest p5 script:
+	
+```javascript
+function setup() {  
+	// initialize the canvas & graphics state:  
+	createCanvas(windowWidth, windowHeight);  
+	background(128);
+}
+```
+
+- If you see the screen change its color to grey, you know that you're ready:
+  	
+![codepen](image/codepen02.png)  
+  	
+*Yeah~ Successful!*
+
+- You may also want to open the browser console, where any errors will be printed. How to do this depends on what browser you use. E.g. in Chrome, it is under View / Developer > JavaScript Console. In Firefox it is Tools / Web Developer > Browser Console. [For other browsers see here.](https://webmasters.stackexchange.com/questions/8525/how-do-i-open-the-javascript-console-in-different-browsers)
+
+_____________________________
+
+### Conway's Game of Life
+
+>- If the current state is 1 ("alive"):
+	- If the neighbor total is less than 2: New state is 0 ("death by loneliness")
+	- Else if the neighbor total is greater than 3: New state is 0 ("death by overcrowding")
+	- Else: State remains the same ("alive")
+- If the current state is 0 ("dead"):
+	- If the neigbor total is exactly 3: New state is 1 ("reproduction")
+	- Else: State remains the same ("dead")
+	
+
+
+```javascript
+
+// declare global variables,
+// that can be used in any function
+// and persist through the program's lifetime:
+
+// cell size in pixels:
+let cell_size = 8;
+// number of cells in each dimension
+// (depends on cell_size and canvas size):
+let columns, rows;
+
+// cells is defined as an empty array
+// (this will become a "2D" array -- an array of arrays):
+let cells = [];
+// we also need a second 2D array for the next generation
+// (at each frame we calculate new cell values and store them in newcells
+// and then swap cells and newcells for the next frame)
+let newcells = [];
+
+// setup() runs once when the program starts
+// use it to define the canvas
+// and initialize the global state
+function setup() {
+  // create a p5.js canvas that fills the available area:
+  canvas = createCanvas(windowWidth, windowHeight);
+  // initialize graphics: black background, no borders:
+  background(0);
+  noStroke();
+  
+  // number of cells in each dimension
+  // (depends on cell_size and canvas size):
+  columns = width/cell_size;
+  rows = height/cell_size;
+  
+  // initialize the 2D arrays of cells and newcells:
+  // first create a list of rows:
+  
+  for (let r = 0; r < rows; r++) {
+    // create a new row (array of arrays):
+    cells[r] = [];
+    newcells[r] = [];
+    // for each column in this row:
+    for (let c=0; c < columns; c++) {
+      // create a new cell
+      // state is either 0 or 1
+      cells[r][c] = floor(random(2));
+      // newcells starts off identical to cells:
+      newcells[r][c] = cells[r][c];
+    }
+  }
+}
+
+// the draw() function is called repeatedly
+// about 60 times a second (if the computer is fast enough)
+function draw() {
+  
+  // compute the new generation as 'newcells'
+  // by reading from the states in 'cells':
+  // row by row, column by column:
+  for (let r = 0; r < rows; r++) {
+    // for each column in this row:
+    for (let c=0; c < columns; c++) {
+      // get this cell's current state:
+      let cell = cells[r][c];
+      
+      // special case for border cells:
+      // i.e. where the cell's row is 0 or (rows-1)
+      // or the cell's column is 0 or (columns-1)
+      // these cells do not have a full neighbourhood
+      if (c <= 0 || c >= columns-1 || r <= 0 || r >= rows-1) {
+        // some options:
+        // let border cells be always dead
+        newcells[r][c] = 0;
+        // or, let border cells stay the same
+        //newcells[r][c] = cell;
+        // or, let border cells be always randomized:
+        //newcells[r][c] = floor(random(2));
+      } else {
+        // not a border cell
+        
+        // get each of the neighbouring cells (from the previous generation):
+        let N  = cells[r-1][c  ];
+        let S  = cells[r+1][c  ];
+        let W  = cells[r  ][c-1];
+        let E  = cells[r  ][c+1];
+        let NE = cells[r-1][c+1];
+        let SE = cells[r+1][c+1];
+        let NW = cells[r-1][c-1];
+        let SW = cells[r+1][c-1];
+        // add them up:
+        let sum = N + S + E + W + NE + SE + NW + SW;
+        
+        // Game of life rules:
+        if (cell) {
+          // cell is 'alive'
+          if (sum < 2 || sum > 3) {
+            // death by loneliness or overcrowding
+            newcells[r][c] = 0;
+          } else {
+            // staying alive
+            newcells[r][c] = 1;
+          }
+        } else {
+          // cell is 'dead'
+          if (sum == 3) {
+            // three neighbors, trisexual reproduction:
+            newcells[r][c] = 1;
+          } else {
+            // stay 'dead'
+            newcells[r][c] = 0;
+          }
+        }
+      }
+    }
+  }
+  
+  // now do another loop to draw it, updating cells as we go:
+  for (let r = 0; r < rows; r++) {
+    for (let c=0; c < columns; c++) {
+      // get the state of this location in the newcells array:
+      let cell = newcells[r][c];
+      // scale state (0,1) up to greyscale range (0,255):
+      fill(cell * 255);   
+      // draw a box at this cell's location and size:
+      rect(c*cell_size, r*cell_size, cell_size, cell_size);
+      // update the old cells array with the new cell value:
+      // (if we didn't do this, the CA would not continuously update)
+      cells[r][c] = cell;
+    }
+  }
+}
+
+```
+
+### Langton's Ant
+
+>A cellurar space (a 2D grid) of black or white cells is inhabited by one or more ants
+these ants face one of four possible directions (north, east, south, or west)
+and move one cell at a time, following a very simple rule:
+- at a white square, turn 90° right, flip the color of the square, move forward one unit
+- at a black square, turn 90° left, flip the color of the square, move forward one unit
+
+```javascript
+
+// declare global variables,
+// that can be used in any function
+// and persist through the program's lifetime:
+
+// cells is defined as an empty array
+// (this will become a "2D" array -- an array of arrays):
+let cells = [];
+// cell size in pixels:
+let cell_size = 8;
+// number of cells in each dimension
+// (depends on cell_size and canvas size):
+let columns, rows;
+
+// this is the ant that will wander around the cellular space:
+let ant;
+
+// setup() runs once when the program starts
+// use it to define the canvas
+// and initialize the global state
+function setup() {
+  // create a p5.js canvas that fills the available area:
+  canvas = createCanvas(windowWidth, windowHeight);
+  // initialize graphics: black background, no borders:
+  background(0);
+  noStroke();
+
+  // number of cells in each dimension
+  // (depends on cell_size and canvas size):
+  columns = floor(width / cell_size);
+  rows = floor(height / cell_size);
+
+  // initialize the 2D array of cells
+  // first create a list of rows:
+  for (let r = 0; r < rows; r++) {
+    // create a new row (array of arrays):
+    cells[r] = [];
+    // for each column in this row:
+    for (let c = 0; c < columns; c++) {
+      // create a new cell
+      // state is either 0 or 1
+      // initially we set the state to 1 (white)
+      cells[r][c] = 1;
+    }
+  }
+
+  // initialize the ant
+  ant = {
+    // start in the middle of the space:
+    x: floor(columns / 2),
+    y: floor(rows / 2),
+    // with a random heading:
+    // ants can only face north, east, south, or west
+    // we can encode these directions as 0, 1, 2, 3:
+    direction: floor(random(4))
+  };
+}
+
+// the draw() function is called repeatedly
+// about 60 times a second (if the computer is fast enough)
+function draw() {
+  // update the ant:
+  // the ant's rules depend on the state of the cell it stands on:
+  let cell = cells[ant.y][ant.x];
+  // if the cell is white:
+  if (cell) {
+    // turn clockwise:
+    ant.direction--;
+    // make sure the direction is still in the range 0, 1, 2, 3:
+    if (ant.direction == -1) {
+      ant.direction = 3;
+    }
+    // now flip the square color to black:
+    cells[ant.y][ant.x] = 0;
+  } else {
+    // the cell is black
+    // turn anti-clockwise:
+    ant.direction++;
+    // make sure the direction is still in the range 0, 1, 2, 3:
+    if (ant.direction == 4) {
+      ant.direction = 0;
+    }
+    // now flip the square color to white:
+    cells[ant.y][ant.x] = 1;
+  }
+
+  // move forward one unit:
+  if (ant.direction == 0) {
+    // North:
+    ant.y--;
+  } else if (ant.direction == 1) {
+    // East:
+    ant.x++;
+  } else if (ant.direction == 2) {
+    // South:
+    ant.y++;
+  } else if (ant.direction == 3) {
+    // West:
+    ant.x--;
+  }
+
+  // if we hit the edge of the canvas, wrap around:
+  if (ant.x < 0) {
+    ant.x += columns;
+  } else if (ant.x >= columns) {
+    ant.x -= columns;
+  }
+  if (ant.y < 0) {
+    ant.y += rows;
+  } else if (ant.y >= rows) {
+    ant.y -= rows;
+  }
+
+  // draw the space:
+  for (let r = 0; r < rows; r++) {
+    for (let c = 0; c < columns; c++) {
+      let cell = cells[r][c];
+      // scale state (0,1) up to greyscale range (0,255):
+      fill(cell * 255);
+      // draw a box at this cell's location and size:
+      rect(c * cell_size, r * cell_size, cell_size, cell_size);
+    }
+  }
+
+  // draw the ant:
+  fill("red");
+  rect(ant.x * cell_size, ant.y * cell_size, cell_size, cell_size);
+}
+```
+
+```javascript
+// declare global variables,
+// that can be used in any function
+// and persist through the program's lifetime:
+let columns, rows, generation;
+// cells is defined as an empty array:
+let cells = [];
+
+// setup() runs once when the program starts
+// use it to define the canvas
+// and initialize the global state
+function setup() {
+  // create a p5.js canvas that fills the available area:
+  canvas = createCanvas(windowWidth, windowHeight);
+  // initialize graphics: black background, no borders:
+  background(0);
+  noStroke();
+
+  // define number of rows & columns by pixel dimensions:
+  columns = floor(windowWidth);
+  rows = floor(windowHeight);
+  // initialize the simulation data:
+  reset();
+}
+
+function reset() {
+  // set each cell to a random initial value:
+  for (let i = 0; i < columns; i++) {
+    // random(2) picks a decimal number greater than or equal to zero, and less than 2.
+    // floor() rounds this down to the nearest whole number
+    // so the result is either exactly 0 or 1:
+    cells[i] = floor(random(2));
+  }
+  // start at the zeroth generation:
+  generation = 0;
+}
+
+// the draw() function is called repeatedly
+// about 60 times a second (if the computer is fast enough)
+function draw() {
+  // draw each cell:
+  for (let i = 0; i < columns; i++) {
+    // get the current cell
+    let cell = cells[i];
+    // draw it
+    // set the paint color to black (0) or white (255)
+    // according to the cell value
+    fill(cell * 255);
+    // draw a box, at the cells's column,
+    // at the current generation's row,
+    // of size 1 pixel by 1 pixel
+    rect(i, generation, 1, 1);
+  }
+
+  // increment the current generation count:
+  generation++;
+  // if we haven't yet filled the screen:
+  if (generation < rows) {
+    // compute a new generation:
+    // create a new array to hold the next generation of cells
+    // (need to make a new array, rather than modifying in place,
+    // so that cells and neighbours properly update in parallel)
+    let newcells = [];
+    // compute each new cell value:
+    for (let i = 0; i < columns; i++) {
+      // get the current cell, and its left and right neighbours:
+      let left = cells[i - 1];
+      let center = cells[i];
+      let right = cells[i + 1];
+      // call the rule() function to determine the new cell value:
+      newcells[i] = rule(left, center, right);
+    }
+    // replace the "cells" variable with the new generation
+    // to be used on the next frame:
+    cells = newcells;
+  } else {
+    // else if we *have* filled the screen,
+    // reset the simulation:
+    reset();
+  }
+}
+
+// returns a new cell state according to a neighborhood
+// of three input cells
+function rule(left, center, right) {
+  // it is possible that the left or right neighbour are undefined
+  // (this happens at the left-most and right-most boundaries of the array
+  if (left == undefined) {
+    // the left-most cell has no left neihbour,
+    // so return the state unchanged:
+    return center;
+  } else if (right == undefined) {
+    // the right-most cell has no right neihbour,
+    // so return the state unchanged:
+    return center;
+  } else if (left == 1 && center == 1 && right == 1) {
+    return 0;
+  } else if (left == 1 && center == 1 && right == 0) {
+    return 1;
+  } else if (left == 1 && center == 0 && right == 1) {
+    return 0;
+  } else if (left == 1 && center == 0 && right == 0) {
+    return 1;
+  } else if (left == 0 && center == 1 && right == 1) {
+    return 1;
+  } else if (left == 0 && center == 1 && right == 0) {
+    return 0;
+  } else if (left == 0 && center == 0 && right == 1) {
+    return 1;
+  } else if (left == 0 && center == 0 && right == 0) {
+    return 0;
+  }
+}
+```
+
+---
+# Case studies from students: various alternation 
+- [Creative coding: Cellular Automata](https://ocaduniversity-my.sharepoint.com/:p:/g/personal/3166051_ocadu_ca/EdIpOwoGufdHuWDFr98ErJsBo3MjRecED07MbdgBHJ1FPw?e=9swQzI)  This collection of CA alternations are from the class Atelier 1: Discovery and its 2nd module Endless Forms Most Beautiful instruted by Haru Ji in Fall 2020. 
+
+---
+# Continuous automata
+
+The CAs are mostly discrete, and this is often evident in the results. But there are several ways to approximate fully continuous automata -- and investigate to what extent similar properties or behaviours arise, and whether new properties can arise unique to continuous spaces. At the least, continuous automata are more able to show liquid and diffusive effects:
+
+## Smoothlife
+
+- [Generalized Conway Game of Life - SmoothLife1](https://www.youtube.com/embed/ISQChKRH4NI?list=PL69EDA11384365494)
+
+## Reaction Diffusion
+
+The reaction-diffusion model was proposed by Alan Turing to describe embryo development and pattern-generation ([Turing, A. The Chemical Basic for Morphogenesis.](http://www.dna.caltech.edu/courses/cs191/paperscs191/turing.pdf)); it is still used today in computer graphics ([Greg Turk's famous paper](http://www.cc.gatech.edu/~turk/my_papers/reaction_diffusion.pdf)). RD systems and other differential equation systems can be approximated using continuous automata.
+
+- [Reaction-Diffusion "Coral Growth" Example](https://www.youtube.com/embed/8dTmUr5qKvI?rel=0)  
+One approach to simulating RD using CA is the *Gray-Scott* model, as described in [Pearson, J. E. Complex Patterns in a Simple System](http://arxiv.org/pdf/patt-sol/9304003.pdf). A browser-based example is [here](https://pmneila.github.io/jsexp/grayscott/).
+
+<!--
+## Deliverables
+- Review today's exercises and readings.  
+- Documenting (ongoing): summarize your progress for this week and submit by this Saturday 11:59 pm. 
+	- Text form in Canvas (not PDF):
+		- Add one or two paragraphs of your description. 
+		- Please add four links to your work in the p5 or Codepen editors. Don't forget to check if the links work before submitting. 
+			- In your code, add your organized comments.
+		 
+	- The four links are: 
+		- **Two of Sol Lewitt's rules** of your choices and their expressions.  
+		- **One of Casey Reas' rule** of your choice. This should show behaviors and as a variation, you can mix with some of Sol Lewitt's rules.
+		- **One of Cellular Automata** variations. 
+		
+	- Please spend some time to make them aesthetically pleasing to you.   
+	  
+- **Presentation**: Prepare ideas for your presentation (approx. 1 to 2 pages) for your experiment 2 project and add it to this [Google slide document](https://docs.google.com/presentation/d/1ZdMfiPkXLqSXmrHq1iaLAqGuESEOYc5UGXRZcuZkzkM/edit?usp=sharing). 
+	- What to do:
+		- You will make a rule for expression in ***P5.js, Processing desktop, or not programming based*** and follow with at least one expression. Next Tuesday, you will work on this and possibly present it to the class to discuss and refine it. You will also select a rule from one of your fellow artists from the current class or the previous class (you can find the link to the previous presentation below). On Thursday (Oct 25), you will present the final result of your refined rule and its expression, as well as your chosen rule from fellow artists with at least one expression for each.   
+	- Link to previous presentations: [link](https://docs.google.com/presentation/d/1b1yvVYCPinl9RQqOChPwjHN5ikRDOJs_OBSpb3_HtEM/edit#slide=id.g2ae548cfdb_2_10)  
+- Next Tuesday, we will have work time and possibly a short presentation time.  
+_________________
+
+
+<!--
+The start of the document must include your name, school ID. You can add ***short descriptions*** to each images. Due date will be Oct 6 11:59 pm. Please upload your documentation as a PDF file via Canvas / Assignment EX 2-1.  
+- Feedback: You can leave your comments here in terms of today's class : [feedback link](https://goo.gl/forms/rgQF11xdCyxZ5Is93), Due date is today midnight.-->
+
+
+</div>
+<div id="wrapper">
+	
+	<div class="header">
+		
+		<h1>SJSU Workshop:</h1>
+		<h2>Data + AI + Design<br/><br/><i>Games of Life</i></h2>	
+		<h4>March 2021</h4>	
+		<!--<a href="https://docs.google.com/spreadsheets/d/1K5NZkTA1T4RKmzqaKYdQWsDGX65UCwiQRFQUoQycz3o/edit?usp=sharing">Attendance DIGF-2014-001</a><br/>
+		<a href="https://docs.google.com/spreadsheets/d/1FsNti4Y5onZ3aXFO4KzOMFDWA3ORErPSDY0Ho9WU6Hs/edit?usp=sharing">Attendance DIGF-2014-002</a><br/><br/>
+	
+		<h3>Schedule</h3>	
+				<a href="index.html">1: Sol LeWitt</a><br/>
+				<a href="01_latham.html">2: William Latham</a><br/>
+				<a href="02_caseyR.html">3: Casey Reas and P5</a><br/>
+				<a href="03_ca.html">4: Cellular Automata</a><br/>
+				<a href="04_refinement.html"></a>5: Refinement</a><br/>								
+				<a href="05_critique.html"></a>6: Presentation / Critique</a><br/> -->
+				
+	</div>
+	<div class="section">
+		<script type="text/javascript">
+		//var converter = new Markdown.Converter();
+		var converter = new Showdown.converter();
+		document.write(converter.makeHtml($('#sourcetext').text()));
+		</script>
+	</div>
+	
+	<div class="footer"><a href="https://artificialnature.net/">Artificial Nature [Haru + Graham]</a></div>
+	
+</div>
+</body>
+</html>
