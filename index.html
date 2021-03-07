@@ -20,15 +20,20 @@ header {
   left: 0px;
   top: 0px;
 
-  width:200px;
+  width:220px;
   padding:10px;
   
   max-height: 100%;
   overflow-y: scroll;
   margin-bottom: 100px;
 }
+
+header ul {
+  padding-left: 1em;
+}
+
 footer {
-  width:200px;
+  width:220px;
   position:fixed;
   left: 0px;
   bottom:0px;
@@ -38,7 +43,7 @@ footer {
 }
 #content {
   padding:10px;
-  padding-left: 240px; 
+  padding-left: 260px; 
   max-width: 920px;
 }
 
@@ -56,9 +61,9 @@ footer {
 
 <body>
 <header>
-  <h2>SJSU Workshop</h2>
-  <h3>Data + AI + Design<br/><br/><i>Games of Life</i></h3>	
+  <h2><b>SJSU Workshop</b><br/>Data+AI+Design</h2>	
   <h4>March 2021</h4>	
+  <h3><i>Artificial Natures: Games of Life</i></h3>
   <div id="menu"></div>
 </header>
 <div id="content"></div>
@@ -67,7 +72,13 @@ footer {
 
 <div style="display: none" id="sourcetext">
 
+**TODO: DELETE THIS ONCE DONE**
+
+[Graham's course pages](http://alicelab.world/digm5950/ca.html)
+
 # Autonomous Complexity in Life and Machines
+
+![](image/DataAIDesign_Posters-03.jpg)
 
 ![](image/student/0.png "19%x19%") ![](image/student/1.png "19%x19%") ![](image/student/2.png "19%x19%") ![](image/student/3.png "19%x19%") ![](image/student/4.png "19%x19%") ![](image/student/5.png "19%x19%") ![](image/student/6.png "19%x19%") ![](image/student/7.png "19%x19%") ![](image/student/8.png "19%x19%") ![](image/student/9.png "19%x19%") ![](image/student/10.png "19%x19%") ![](image/student/11.png "19%x19%") ![](image/student/12.png "19%x19%") ![](image/student/13.png "19%x19%") ![](image/student/14.png "19%x19%") ![](image/student/15.png "19%x19%") ![](image/student/16.png "19%x19%") ![](image/student/17.png "19%x19%") ![](image/student/18.png "19%x19%") ![](image/student/19.png "19%x19%") ![](image/student/20.png "19%x19%") ![](image/student/21.png "19%x19%") ![](image/student/22.png "19%x19%") ![](image/student/23.png "19%x19%") ![](image/student/24.png "19%x19%") ![](image/student/25.png "19%x19%") ![](image/student/26.png "19%x19%") ![](image/student/27.png "19%x19%") ![](image/student/28.png "19%x19%") ![](image/student/29.png "19%x19%") ![](image/student/30.png "19%x19%") ![](image/student/31.png "19%x19%") ![](image/student/32.png "19%x19%") ![](image/student/33.png "19%x19%") ![](image/student/34.png "19%x19%")
 
@@ -79,19 +90,16 @@ In this workshop we will examine the nature of CAs, their history and how they w
 
 We will use web-based Javascript editors to make these short lines of scripts together. This code should be intuitive to read and parse, and we will examine how we can alternate it to fit to your design and art expressions. A computer with internet connection is required however, coding experience is not.  
 
+### How can life emerge from non-life?
 
-
-## How can life emerge from non-life?
-
-The question of how life can emerge from non-life is fundamental to life itself, but it is a question upon which science can only speculate, as we have no readily available examples of the spontaneous emergence of life for empirical study. However, the problem can be approached more generally through the modeling of the emergence of complex structures that evoke life-like characteristics, from simpler dynamic substrates. 
-
-## Cellular Automata 
+The question of how life can emerge from non-life is fundamental to understand what life is, but it is a question upon which science can only speculate, as we have no readily available examples of the spontaneous emergence of life for empirical study. However, the problem can be approached more generally through the modeling of the emergence of complex structures that evoke life-like characteristics, from simpler dynamic substrates. 
 
 In this workshop we'll look at this question through the relatively simple model of Cellular Automata (CA). The CA model was propsed by Stanislaw Ulam and used by [von Neumann](https://en.wikipedia.org/wiki/Von_Neumann_universal_constructor) -- in the 1940's -- to demonstrate the possibility of machines that could reproduce themselves. At this time CAs were modeled using pen and paper or with tokens on chessboards, but since the model is discrete in time, space, and states, it is also immediately suitable for computational simulation.
 
 The world of a Cellular Automata is a grid of cells (in one, two, or more dimensions), each of which can be in one or another state (e.g. white or black). Each cell follows a simple set of rules to change its state according to the states of its immediate neighbors.
 
 ## Schedule
+
 1. CA Context.  
 2. Explorations of Cellular Automata using P5.js 
 	- Launch.  
@@ -99,18 +107,17 @@ The world of a Cellular Automata is a grid of cells (in one, two, or more dimens
 	- Langton's Ant.  
 3. Q&A, further discusion.	
 
-## Requirement
-Laptop & notebook.
+### Requirements
+
+Networked computer, notebook/pencil & paper.
 
 _____________________________
 
-# Conway's Game of Life, 1970
-## Introduction
-- [Stephen Hawkings The Meaning of Life (John Conway's Game of Life segment), 3:29](https://www.youtube.com/watch?v=CgOcEZinQ2I&t=2s)  
+# Cellular Automata
 
-- [Does John Conway hate his Game of Life?, 6:53](https://www.youtube.com/watch?v=E8kUJL04ELA&feature=youtu.be) 	
-	
-## Rule
+## Conway's Game of Life, 1970
+
+### Rule
 
 The most famous CA is probably the Game of Life. It is a 2D automata, which uses a neighbourhood of 8 neighbours, and synchronous update. The transition rule can be stated as follows:
 
@@ -122,9 +129,17 @@ The most famous CA is probably the Game of Life. It is a 2D automata, which uses
 	- If the neigbor total is exactly 3: New state is 1 ("reproduction")
 	- Else: State remains the same ("dead")
 	
-The Game of Life produces easily recognizable higher-level formations including stable objects, oscillatory objects, mobile objects and objects that produce or consume others, for example, which have been called 'ponds', 'gliders', 'eaters', 'glider guns' and so on. 	
+The Game of Life produces easily recognizable higher-level formations including stable objects, oscillatory objects, mobile objects and objects that produce or consume others, for example, which have been called 'ponds', 'gliders', 'eaters', 'glider guns' and so on. 
 
-## Essential components
+### Videos
+
+- [Stephen Hawkings The Meaning of Life (John Conway's Game of Life segment), 3:29](https://www.youtube.com/watch?v=CgOcEZinQ2I&t=2s)  
+
+- [Does John Conway hate his Game of Life?, 6:53](https://www.youtube.com/watch?v=E8kUJL04ELA&feature=youtu.be) 	
+		
+
+## Essential CA components
+
 The essential components that define a cellular system are:
 
 - **Cellular space:** A collection of cells arranged into a discrete lattice, such as a 2D grid. The space is usually 1D, 2D or 3D, but rarely greater. 
@@ -145,13 +160,45 @@ The essential components that define a cellular system are:
 
 - **Boundary conditions:** What happens to cells at the edges of the space. A periodic boundary 'wraps around' to the opposite edge; a static boundary always has the same state, a reflective boundary mirrors the neighbor state.
 
-## The coding train tutorial
+### Observations
 
-- [The Game of Life - The Nature of Code by The coding train.](https://www.youtube.com/watch?v=tENSCEO-LEc)  	
-	
-> The spatial directions of cells do not matter, only the total value of all neighbors is used, along with the current value of the cell itself. Note also that these rules mean that the Game of Life is not reversible: from a given state it is not possible to determine the previous state.
+In the Game of Life, the spatial directions of cells do not matter, only the total value of all neighbors is used, along with the current value of the cell itself. Also the rules of the Game of Life rules mean that the Game of Life is not reversible: from a given state it is not possible to determine the previous state.
 
-# Langton's Ant, 1986
+#### Bottom-up approach
+
+The strategy of making possible complex phenomena by the simulation of simple components.
+
+**TODO: SELF ORGANIZATION**
+
+>In a bottom-up approach the individual base elements of the system are first specified in great detail. These elements are then linked together to form larger subsystems, which then in turn are linked, sometimes in many levels, until a complete top-level system is formed. - wikipedia.
+
+### Wolfram's Rule 30
+
+Stephen Wolfram, author of Mathematica, performed extensive research on CAs and uncovered general classes of behaviour comparable to dynamical systems. A commonly referenced example is his 'rule 30', which is a 1D CA displayed below as a stacked trace (history goes down) -- whose pattern is reminiscent of some naturally occurring shell patterns:
+
+![Evolution of a 1D CA: rule 30](image/ca_shells.jpg)  
+
+![Rule 30](image/rule30.png)
+
+- [Elementary CA - mathworld.wolfram.com](http://mathworld.wolfram.com/ElementaryCellularAutomaton.html)  
+
+- [Computing a theory of everything | Stephen Wolfram, TED](https://www.youtube.com/watch?v=60P7717-XOQ)  
+
+---codepen:https://codepen.io/Hrrr/pen/MOJmwL?editors=0010
+
+### Four CA classes
+
+Wolfram divided CA into four classes, according to their long-term behavior:
+
+- **Class 1:** Evolve to a fixed and homogeneous state.
+- **Class 2:** Evolve to simple periodic configurations (limit cycles).
+- **Class 3:** Evolve to chaotic patterns 
+- **Class 4:** Evolve to complex patterns of localized structures with long transients.  
+ 
+Conway’s Game of Life is a class 4 CA. 
+
+
+## Langton's Ant, 1986
 
 - [Langton's Ant (and Life)](http://datagenetics.com/blog/september22015/index.html)
 
@@ -166,57 +213,63 @@ Christopher Langton also proposed a more concise self-reproducing CA than von Ne
 
 - [Langton's Loops, 3:35](https://www.youtube.com/watch?v=2iDc4C6vbcc) 
 
-# Wolfram's Rule 30
+## More CAs
 
-Stephen Wolfram, author of Mathematica, performed extensive research on CAs and uncovered general classes of behaviour comparable to dynamical systems. A commonly referenced example is his 'rule 30', which is a 1D CA displayed below as a stacked trace (history goes down) -- whose pattern is reminiscent of some naturally occurring shell patterns:
+**Langton's Ant** multiple ants:
 
-![Evolution of a 1D CA: rule 30](image/ca_shells.jpg)  
+---codepen:https://codepen.io/grrrwaaa/pen/LMJwVP
 
-![Rule 30](image/rule30.png)
+**Brian's Brain** 3-state CA:
 
-[Here it is in p5.js](https://codepen.io/Hrrr/pen/MOJmwL?editors=0010)
+---codepen:https://codepen.io/grrrwaaa/pen/JwaQqV
 
-- [Elementary CA - mathworld.wolfram.com](http://mathworld.wolfram.com/ElementaryCellularAutomaton.html)  
+**Forest Fire** probabilistic CA:
 
-- [Computing a theory of everything | Stephen Wolfram, TED](https://www.youtube.com/watch?v=60P7717-XOQ)  
+---codepen:https://codepen.io/grrrwaaa/pen/OroeKW
 
-## Four CA classes
-Wolfram divided CA into four classes, according to their long-term behavior:
+**String Thing** block rule CA:
 
-- **Class 1:** Evolve to a fixed and homogeneous state.
-- **Class 2:** Evolve to simple periodic configurations (limit cycles).
-- **Class 3:** Evolve to chaotic patterns 
-- **Class 4:** Evolve to complex patterns of localized structures with long transients.  
- 
-Conway’s Game of Life is a class 4 CA. 
+---codepen:https://codepen.io/grrrwaaa/pen/NGxJpP
 
-## Bottom-up approach
-The strategy of making possible complex phenomena by the simulation of simple components.
+**Hodge-Podge** contact process model:
 
->In a bottom-up approach the individual base elements of the system are first specified in great detail. These elements are then linked together to form larger subsystems, which then in turn are linked, sometimes in many levels, until a complete top-level system is formed. - wikipedia.
+---codepen:https://codepen.io/grrrwaaa/pen/bOxXEo
 
-# Termites
+**Ising model**:
 
-Mitchel Resnick's termite model is a random walker in a space that can contain woodchips, in which each termite can carry one woodchip at a time. The program for a termite looks something like this:
+---codepen:https://codepen.io/grrrwaaa/pen/wREVKe
 
-- Look at the space just in front of me
-- If it is empty, move forward and randomly change direction (random walk)
-- Else if it is occupied by a woodchip:
-	- If I am carrying a wood chip, drop mine where I am and turn around
-	- Else move forward and pick up the woodchip
-	
-Over time, the termites begin to collect the woodchips into small piles, which gradually coalesce into a single large pile of chips.
+**Gray-Scott** reaction-diffusion model:
 
-> Note that Termites and Langton's Ant CAs are closely related to the turtle graphics often used for L-systems,
+---codepen:https://codepen.io/grrrwaaa/pen/roZXmR
 
-- [L-Systems - The Nature of Code by the codding train](https://www.youtube.com/watch?v=f6ra024-ASY)  
+
+### Continuous automata
+
+The CAs are mostly discrete, and this is often evident in the results. But there are several ways to approximate fully continuous automata -- and investigate to what extent similar properties or behaviours arise, and whether new properties can arise unique to continuous spaces. At the least, continuous automata are more able to show liquid and diffusive effects:
+
+#### Smoothlife
+
+- [Generalized Conway Game of Life - SmoothLife1](https://www.youtube.com/embed/ISQChKRH4NI?list=PL69EDA11384365494)
+
+### Reaction Diffusion
+
+The reaction-diffusion model was proposed by Alan Turing to describe embryo development and pattern-generation ([Turing, A. The Chemical Basic for Morphogenesis.](http://www.dna.caltech.edu/courses/cs191/paperscs191/turing.pdf)); it is still used today in computer graphics ([Greg Turk's famous paper](http://www.cc.gatech.edu/~turk/my_papers/reaction_diffusion.pdf)). RD systems and other differential equation systems can be approximated using continuous automata.
+
+- [Reaction-Diffusion "Coral Growth" Example](https://www.youtube.com/embed/8dTmUr5qKvI?rel=0)  
+One approach to simulating RD using CA is the *Gray-Scott* model, as described in [Pearson, J. E. Complex Patterns in a Simple System](http://arxiv.org/pdf/patt-sol/9304003.pdf). A browser-based example is [here](https://pmneila.github.io/jsexp/grayscott/).
 
 
 _____________________________
-# Explorations of Cellular Automata using P5.js
-## Launch
+
+# Using P5.js
+
+## Online editors
+
 ### P5 Editor
+
 The p5.js Web Editor is an online platform for learning to code in a visual way. Designed for all ages and abilities, anyone can get started quickly creating, editing, and sharing p5.js sketches.  
+
 It is free and open source, no sign up, setup, or download required. Using p5.js you can use JavaScript, HTML, and CSS to create graphics in 2D and 3D, add text, images, video, and audio, and make your sketch interactive with mouse, touch, webcam input, and motion sensing.  
 
 [p5 editor link](https://editor.p5js.org/)  
@@ -273,7 +326,7 @@ _____________________________
 
 ### Conway's Game of Life
 
->- If the current state is 1 ("alive"):
+- If the current state is 1 ("alive"):
 	- If the neighbor total is less than 2: New state is 0 ("death by loneliness")
 	- Else if the neighbor total is greater than 3: New state is 0 ("death by overcrowding")
 	- Else: State remains the same ("alive")
@@ -281,7 +334,6 @@ _____________________________
 	- If the neigbor total is exactly 3: New state is 1 ("reproduction")
 	- Else: State remains the same ("dead")
 	
-
 
 ```javascript
 
@@ -417,6 +469,12 @@ function draw() {
 }
 
 ```
+
+
+### The coding train tutorial
+
+- [The Game of Life - The Nature of Code by The coding train.](https://www.youtube.com/watch?v=tENSCEO-LEc)  	
+	
 
 ### Langton's Ant
 
@@ -673,26 +731,13 @@ function rule(left, center, right) {
 ```
 
 ---
-# Case studies from students: various alternation 
+
+## Student works
+
 - [Creative coding: Cellular Automata](https://ocaduniversity-my.sharepoint.com/:p:/g/personal/3166051_ocadu_ca/EdIpOwoGufdHuWDFr98ErJsBo3MjRecED07MbdgBHJ1FPw?e=9swQzI)  This collection of CA alternations are from the class Atelier 1: Discovery and its 2nd module Endless Forms Most Beautiful instruted by Haru Ji in Fall 2020. 
 
-![](image/student/0.png "19%x19%") ![](image/student/1.png "19%x19%") ![](image/student/2.png "19%x19%") ![](image/student/3.png "19%x19%") ![](image/student/4.png "19%x19%") ![](image/student/5.png "19%x19%") ![](image/student/6.png "19%x19%") ![](image/student/7.png "19%x19%") ![](image/student/8.png "19%x19%") ![](image/student/9.png "19%x19%") ![](image/student/10.png "19%x19%") ![](image/student/11.png "19%x19%") ![](image/student/12.png "19%x19%") ![](image/student/13.png "19%x19%") ![](image/student/14.png "19%x19%") ![](image/student/15.png "19%x19%") ![](image/student/16.png "19%x19%") ![](image/student/17.png "19%x19%") ![](image/student/18.png "19%x19%") ![](image/student/19.png "19%x19%") ![](image/student/20.png "19%x19%") ![](image/student/21.png "19%x19%") ![](image/student/22.png "19%x19%") ![](image/student/23.png "19%x19%") ![](image/student/24.png "19%x19%") ![](image/student/25.png "19%x19%") ![](image/student/26.png "19%x19%") ![](image/student/27.png "19%x19%") ![](image/student/28.png "19%x19%") ![](image/student/29.png "19%x19%") ![](image/student/30.png "19%x19%") ![](image/student/31.png "19%x19%") ![](image/student/32.png "19%x19%") ![](image/student/33.png "19%x19%") ![](image/student/34.png "19%x19%")
+- [Randomized gallery of artificial life experiments](https://artificialnature.net/courses/datt4950/gallery/index.html). This collection of works from "DATT4950: Artificial Life, Generative Art and Creative Code" instructed by Graham Wakefield since 2015.
 
----
-# Continuous automata
-
-The CAs are mostly discrete, and this is often evident in the results. But there are several ways to approximate fully continuous automata -- and investigate to what extent similar properties or behaviours arise, and whether new properties can arise unique to continuous spaces. At the least, continuous automata are more able to show liquid and diffusive effects:
-
-## Smoothlife
-
-- [Generalized Conway Game of Life - SmoothLife1](https://www.youtube.com/embed/ISQChKRH4NI?list=PL69EDA11384365494)
-
-## Reaction Diffusion
-
-The reaction-diffusion model was proposed by Alan Turing to describe embryo development and pattern-generation ([Turing, A. The Chemical Basic for Morphogenesis.](http://www.dna.caltech.edu/courses/cs191/paperscs191/turing.pdf)); it is still used today in computer graphics ([Greg Turk's famous paper](http://www.cc.gatech.edu/~turk/my_papers/reaction_diffusion.pdf)). RD systems and other differential equation systems can be approximated using continuous automata.
-
-- [Reaction-Diffusion "Coral Growth" Example](https://www.youtube.com/embed/8dTmUr5qKvI?rel=0)  
-One approach to simulating RD using CA is the *Gray-Scott* model, as described in [Pearson, J. E. Complex Patterns in a Simple System](http://arxiv.org/pdf/patt-sol/9304003.pdf). A browser-based example is [here](https://pmneila.github.io/jsexp/grayscott/).
 
 
 </div>
@@ -738,13 +783,15 @@ One approach to simulating RD using CA is the *Gray-Scott* model, as described i
 
   
   var source = document.getElementById("sourcetext").innerText;
+  source = source.replace(/\n---codepen:https?:\/\/codepen.io\/+([^\/]+)\/pen\/([^\/\n]+)\/?/g, '<p class="codepen" data-height="520" data-default-tab="js,result" data-user="$1" data-slug-hash="$2" data-preview="true"><span><a href="https://codepen.io/$1/pen/$2">Open pen.</a></span></p>');
+
   var html = marked(source);
 
   console.log(toc)
   var menu = [];
   for (var i=0; i<toc.length; i++) {
     var item = toc[i];
-    if (item.level < 2) {
+    if (item.level <= 2) {
       menu.push( "  ".repeat(item.level-1) + "- [" + item.text + "](#" + item.id + ")" );
     }
   }
@@ -754,6 +801,6 @@ One approach to simulating RD using CA is the *Gray-Scott* model, as described i
   document.getElementById("content").innerHTML = html;
   document.getElementById("menu").innerHTML = menu;
   </script>
-
+<script async src="https://static.codepen.io/assets/embed/ei.js"></script>
 </body>
 </html>
