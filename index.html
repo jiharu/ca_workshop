@@ -14,18 +14,6 @@
 <script src="js/marked.min.js"></script>
 <script src="js/highlight.min.js"></script>
 <style>
-  /*
-header {
-	background-color:#f5f5f5;
-	font-size: 75%;
-	padding: 0.5em;
-}
-
-footer {
-	background-color:#f5f5f5;
-	font-size: 75%;
-	padding: 0.5em;
-}*/
 
 header {
   position:fixed;
@@ -80,6 +68,8 @@ footer {
 <div style="display: none" id="sourcetext">
 
 # Autonomous Complexity in Life and Machines
+
+![](image/student/0.png "19%x19%") ![](image/student/1.png "19%x19%") ![](image/student/2.png "19%x19%") ![](image/student/3.png "19%x19%") ![](image/student/4.png "19%x19%") ![](image/student/5.png "19%x19%") ![](image/student/6.png "19%x19%") ![](image/student/7.png "19%x19%") ![](image/student/8.png "19%x19%") ![](image/student/9.png "19%x19%") ![](image/student/10.png "19%x19%") ![](image/student/11.png "19%x19%") ![](image/student/12.png "19%x19%") ![](image/student/13.png "19%x19%") ![](image/student/14.png "19%x19%") ![](image/student/15.png "19%x19%") ![](image/student/16.png "19%x19%") ![](image/student/17.png "19%x19%") ![](image/student/18.png "19%x19%") ![](image/student/19.png "19%x19%") ![](image/student/20.png "19%x19%") ![](image/student/21.png "19%x19%") ![](image/student/22.png "19%x19%") ![](image/student/23.png "19%x19%") ![](image/student/24.png "19%x19%") ![](image/student/25.png "19%x19%") ![](image/student/26.png "19%x19%") ![](image/student/27.png "19%x19%") ![](image/student/28.png "19%x19%") ![](image/student/29.png "19%x19%") ![](image/student/30.png "19%x19%") ![](image/student/31.png "19%x19%") ![](image/student/32.png "19%x19%") ![](image/student/33.png "19%x19%") ![](image/student/34.png "19%x19%")
 
 Humans have always looked to nature for inspiration. As artists, we have done so in creating a family of “artificial natures”: interactive art installations surrounding humans with biologically-inspired complex systems experienced in immersive mixed reality. The invitation is to become part of an alien ecosystem rich in networks of complex feedback, but not as its central subject. Although artificial natures are computational, we draw our inspiration from the sense of open-ended continuation and the aesthetic integration of playful wonder with the tension of the unfamiliar recalled from childhood explorations in nature.
 
@@ -686,6 +676,8 @@ function rule(left, center, right) {
 # Case studies from students: various alternation 
 - [Creative coding: Cellular Automata](https://ocaduniversity-my.sharepoint.com/:p:/g/personal/3166051_ocadu_ca/EdIpOwoGufdHuWDFr98ErJsBo3MjRecED07MbdgBHJ1FPw?e=9swQzI)  This collection of CA alternations are from the class Atelier 1: Discovery and its 2nd module Endless Forms Most Beautiful instruted by Haru Ji in Fall 2020. 
 
+![](image/student/0.png "19%x19%") ![](image/student/1.png "19%x19%") ![](image/student/2.png "19%x19%") ![](image/student/3.png "19%x19%") ![](image/student/4.png "19%x19%") ![](image/student/5.png "19%x19%") ![](image/student/6.png "19%x19%") ![](image/student/7.png "19%x19%") ![](image/student/8.png "19%x19%") ![](image/student/9.png "19%x19%") ![](image/student/10.png "19%x19%") ![](image/student/11.png "19%x19%") ![](image/student/12.png "19%x19%") ![](image/student/13.png "19%x19%") ![](image/student/14.png "19%x19%") ![](image/student/15.png "19%x19%") ![](image/student/16.png "19%x19%") ![](image/student/17.png "19%x19%") ![](image/student/18.png "19%x19%") ![](image/student/19.png "19%x19%") ![](image/student/20.png "19%x19%") ![](image/student/21.png "19%x19%") ![](image/student/22.png "19%x19%") ![](image/student/23.png "19%x19%") ![](image/student/24.png "19%x19%") ![](image/student/25.png "19%x19%") ![](image/student/26.png "19%x19%") ![](image/student/27.png "19%x19%") ![](image/student/28.png "19%x19%") ![](image/student/29.png "19%x19%") ![](image/student/30.png "19%x19%") ![](image/student/31.png "19%x19%") ![](image/student/32.png "19%x19%") ![](image/student/33.png "19%x19%") ![](image/student/34.png "19%x19%")
+
 ---
 # Continuous automata
 
@@ -724,6 +716,19 @@ One approach to simulating RD using CA is the *Gray-Scott* model, as described i
 		}
 		return html
 	}
+  renderer.image = function(href, title, text) {  
+    if (title) {                                                                                                              
+        var size = title.split('x');                                                                                          
+        if (size[1]) {                                                                                                        
+            size = 'width=' + size[0] + ' height=' + size[1];                                                                 
+        } else {                                                                                                              
+            size = 'width=' + size[0];                                                                                        
+        }                                                                                                                     
+    } else {                                                                                                                  
+        size = '';                                                                                                            
+    }                                                                                                                         
+    return ('<img src="' + href + '" alt="' + text + '" ' + size + '>');                                                      
+  };
 	marked.setOptions({
 		renderer: renderer,
 		highlight: function(code, lang) {
@@ -732,9 +737,7 @@ One approach to simulating RD using CA is the *Gray-Scott* model, as described i
 	});
 
   
-
-  
-  var source = document.getElementById("sourcetext").innerText;//$('#sourcetext').text();
+  var source = document.getElementById("sourcetext").innerText;
   var html = marked(source);
 
   console.log(toc)
