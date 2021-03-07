@@ -46,36 +46,35 @@ footer {
   bottom:0px;
   padding:10px;
   background-color: white;
+  font-size: small;
 }
 #content {
   padding:10px;
-  padding-left: 220px; 
+  padding-left: 240px; 
   max-width: 920px;
 }
 
 @media print, screen and (max-width: 720px) {
   header, footer {
     position:static;
+    margin-bottom: 0px;
   }
   #content {
     padding: 5px;
   }
 }
-
 </style>
 </head>
+
 <body>
-<div id="wrapper">
-	<header>
-		<h2>SJSU Workshop</h2>
-		<h3>Data + AI + Design<br/><br/><i>Games of Life</i></h3>	
-		<h4>March 2021</h4>	
-    <div id="menu"></div>
-				
-  </header>
-	<div id="content"></div>
-	<footer><a href="https://artificialnature.net/">Artificial Nature [Haru + Graham]</a></footer>
-</div>
+<header>
+  <h2>SJSU Workshop</h2>
+  <h3>Data + AI + Design<br/><br/><i>Games of Life</i></h3>	
+  <h4>March 2021</h4>	
+  <div id="menu"></div>
+</header>
+<div id="content"></div>
+<footer><a href="https://artificialnature.net/">Artificial Nature [Haru + Graham]</a></footer>
 
 
 <div style="display: none" id="sourcetext">
@@ -748,8 +747,6 @@ One approach to simulating RD using CA is the *Gray-Scott* model, as described i
   }
   // convert markdown menu to html:
   menu = marked(menu.join("\n"));
-
-  //meta.toc = toc.length > 1 ? marked(toc.map(item => `${"  ".repeat(item.level-1)}- [${item.text}](#${item.id})`).join("\n")) : "";
 
   document.getElementById("content").innerHTML = html;
   document.getElementById("menu").innerHTML = menu;
