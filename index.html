@@ -160,13 +160,12 @@ The essential components that define a cellular system are:
 
 In the Game of Life, the spatial directions of cells do not matter, only the total value of all neighbors is used, along with the current value of the cell itself. Also the rules of the Game of Life rules mean that the Game of Life is not reversible: from a given state it is not possible to determine the previous state.
 
-#### Bottom-up approach
+### Bottom-up self-organization
 
-The strategy of making possible complex phenomena by the simulation of simple components.
+The strategy of making possible complex phenomena by the simulation of simple interracting components. In a bottom-up approach the individual base elements of the system are first specified in detail. These elements are then linked together to form larger subsystems, sometimes in many levels, until a complete top-level system is formed. In some cases, this can lead to complex, emergent, and self-organized behaviour.
 
-**TODO: SELF ORGANIZATION**
+> "Self-organization is a process where some form of overall order arises from local interactions between parts of an initially disordered system. The process can be spontaneous, not needing control by any external agent. The resulting organization is wholly decentralized, distributed over all the components of the system. As such, the organization is typically robust and able to survive. Chaos theory discusses self-organization in terms of islands of predictability in a sea of chaotic unpredictability. Self-organization occurs in many physical, chemical, biological, robotic, and cognitive systems. Examples of self-organization include crystallization, thermal convection of fluids, chemical oscillation, animal swarming, neural circuits, and black markets." - [Wikipedia](https://en.wikipedia.org/wiki/Self-organization)
 
->In a bottom-up approach the individual base elements of the system are first specified in great detail. These elements are then linked together to form larger subsystems, which then in turn are linked, sometimes in many levels, until a complete top-level system is formed. - wikipedia.
 
 ### Wolfram's Rule 30
 
@@ -193,16 +192,18 @@ Wolfram divided CA into four classes, according to their long-term behavior:
  
 Conway’s Game of Life is a class 4 CA. 
 
+----
 
 ## Langton's Ant, 1986
+
+[Langton's Ant](http://en.wikipedia.org/wiki/Langton%27s_ant) is a mobile CA in a 2D, two-state space, with a very definition. A cellular space (a 2D grid) of black or white cells is inhabited by one or more ants. These ants face one of four possible directions (north, east, south, or west) and move one cell at a time, following a very simple rule:
+- at a white square, turn 90° right, flip the color of the square, move forward one unit
+- at a black square, turn 90° left, flip the color of the square, move forward one unit
 
 - [Langton's Ant (and Life)](http://datagenetics.com/blog/september22015/index.html)
 
 - [Langton's Ant](http://en.wikipedia.org/wiki/Langton%27s_ant) is a mobile CA in a 2D, two-state space, with very simple rules:
-	- At a white square, turn 90° right, flip the color of the square, move forward one unit
-	- At a black square, turn 90° left, flip the color of the square, move forward one unit
 		
-
 The [original video by Christopher Langton](http://www.youtube.com/watch?v=w6XQQhCgq5c), including examples of multiple ants (and music by the Vasulkas):
 
 Christopher Langton also proposed a more concise self-reproducing CA than von Neumann's, which has since been further improved upon using artificial evolutionary techniques:
@@ -729,100 +730,41 @@ function draw() {
 
 ## Langton's Ant
 
->A cellurar space (a 2D grid) of black or white cells is inhabited by one or more ants
-these ants face one of four possible directions (north, east, south, or west)
-and move one cell at a time, following a very simple rule:
-- at a white square, turn 90° right, flip the color of the square, move forward one unit
-- at a black square, turn 90° left, flip the color of the square, move forward one unit
+The basic definition of a cellular grid can use the same code as with Game of Life. However, this time the cells don't update synchronously (they are changed by the ants instead), so we don't need `newcells`. 
 
-```javascript
+The initial state of the grid is not randomized as in the Game of Life, but is set to all-white or all-black.
 
-// declare global variables,
-// that can be used in any function
-// and persist through the program's lifetime:
+We also need to define an "ant". The ant persists over time, so this should be declared globally. The ant is an object with several properties: a position (row & column) and a direction (N, E, S or W).
 
-// cells is defined as an empty array
-// (this will become a "2D" array -- an array of arrays):
-let cells = [];
-// cell size in pixels:
-let cell_size = 8;
-// number of cells in each dimension
-// (depends on cell_size and canvas size):
-let columns, rows;
+```js
+// global:
+var ant;
 
-// this is the ant that will wander around the cellular space:
-let ant;
-
-// setup() runs once when the program starts
-// use it to define the canvas
-// and initialize the global state
-function setup() {
-  // create a p5.js canvas that fills the available area:
-  canvas = createCanvas(windowWidth, windowHeight);
-  // initialize graphics: black background, no borders:
-  background(0);
-  noStroke();
-
-  // number of cells in each dimension
-  // (depends on cell_size and canvas size):
-  columns = floor(width / cell_size);
-  rows = floor(height / cell_size);
-
-  // initialize the 2D array of cells
-  // first create a list of rows:
-  for (let r = 0; r < rows; r++) {
-    // create a new row (array of arrays):
-    cells[r] = [];
-    // for each column in this row:
-    for (let c = 0; c < columns; c++) {
-      // create a new cell
-      // state is either 0 or 1
-      // initially we set the state to 1 (white)
-      cells[r][c] = 1;
-    }
-  }
-
+  // in setup()
   // initialize the ant
   ant = {
-    // start in the middle of the space:
-    x: floor(columns / 2),
-    y: floor(rows / 2),
+    // start location:
+    x: floor(columns / 2),   // or floor(random(columns))
+    y: floor(rows / 2),      // or floor(random(rows))
     // with a random heading:
     // ants can only face north, east, south, or west
     // we can encode these directions as 0, 1, 2, 3:
     direction: floor(random(4))
   };
-}
+```
 
-// the draw() function is called repeatedly
-// about 60 times a second (if the computer is fast enough)
-function draw() {
-  // update the ant:
-  // the ant's rules depend on the state of the cell it stands on:
-  let cell = cells[ant.y][ant.x];
-  // if the cell is white:
-  if (cell) {
-    // turn clockwise:
-    ant.direction--;
-    // make sure the direction is still in the range 0, 1, 2, 3:
-    if (ant.direction == -1) {
-      ant.direction = 3;
-    }
-    // now flip the square color to black:
-    cells[ant.y][ant.x] = 0;
-  } else {
-    // the cell is black
-    // turn anti-clockwise:
-    ant.direction++;
-    // make sure the direction is still in the range 0, 1, 2, 3:
-    if (ant.direction == 4) {
-      ant.direction = 0;
-    }
-    // now flip the square color to white:
-    cells[ant.y][ant.x] = 1;
-  }
+We can draw the ant in a different colour so we can see where it is;
 
-  // move forward one unit:
+```js
+  // at the end of draw()
+  // draw the ant:
+  fill("red");
+  rect(ant.x * cell_size, ant.y * cell_size, cell_size, cell_size);
+```
+
+To make the ant move, we adjust the location on each frame according to the ant's direction:
+
+```js
   if (ant.direction == 0) {
     // North:
     ant.y--;
@@ -836,35 +778,112 @@ function draw() {
     // West:
     ant.x--;
   }
-
-  // if we hit the edge of the canvas, wrap around:
-  if (ant.x < 0) {
-    ant.x += columns;
-  } else if (ant.x >= columns) {
-    ant.x -= columns;
-  }
-  if (ant.y < 0) {
-    ant.y += rows;
-  } else if (ant.y >= rows) {
-    ant.y -= rows;
-  }
-
-  // draw the space:
-  for (let r = 0; r < rows; r++) {
-    for (let c = 0; c < columns; c++) {
-      let cell = cells[r][c];
-      // scale state (0,1) up to greyscale range (0,255):
-      fill(cell * 255);
-      // draw a box at this cell's location and size:
-      rect(c * cell_size, r * cell_size, cell_size, cell_size);
-    }
-  }
-
-  // draw the ant:
-  fill("red");
-  rect(ant.x * cell_size, ant.y * cell_size, cell_size, cell_size);
-}
 ```
+
+To stop it wandering off, we can wrap it around the edges of the world, like Pac-Man:
+
+```js
+  // if we hit the edge of the canvas, wrap around:
+  if (ant.direction == 0) {
+    // North:
+    ant.y--;
+    if (ant.y < 0) ant.y += rows;
+  } else if (ant.direction == 1) {
+    // East:
+    ant.x++;
+    if (ant.x >= columns) ant.x -= columns;
+  } else if (ant.direction == 2) {
+    // South:
+    ant.y++;
+    if (ant.y >= rows) ant.y -= rows
+  } else if (ant.direction == 3) {
+    // West:
+    ant.x--;
+    if (ant.x < 0) ant.x += columns;
+  }
+```
+
+Now we are ready to add the Ant's rule: 
+
+- at a white square, turn 90° right, flip the color of the square, move forward one unit
+- at a black square, turn 90° left, flip the color of the square, move forward one unit
+
+This should be inserted *before* the ant moves:
+
+```js
+  // the ant's rules depend on the state of the cell it stands on:
+  let cell = cells[ant.y][ant.x];
+
+  // if the cell is white:
+  if (cell) {
+    // turn clockwise:
+    ant.direction--;
+    // make sure the direction is still in the range 0, 1, 2, 3:
+    if (ant.direction < 0) ant.direction += 4;
+  } else {
+    // turn anti-clockwise:
+    ant.direction++;
+    // make sure the direction is still in the range 0, 1, 2, 3:
+    if (ant.direction > 3) ant.direction -= 4;
+  }
+  // now flip the square color to black:
+  cells[ant.y][ant.x] = 0;
+```
+
+That's it! 
+
+---
+
+Things can get interesting if you speed this up. We can wrap the whole ant-update routine in another "for loop" to make the ant move many times per frame. Try running 10, 100, or even 1000 times per frame, and see what happens! 
+
+
+```js
+  // run many ant-simulation steps per frame
+  for (var i=0; i < 10; i++) {
+    // put ant cell rule here
+    // put ant move code here
+  }
+  // put drawing code here
+```
+
+Things can also get interesting when more than one ant lives in the world. We can alloate a list (array) of ants globally, and set up each ant's position and direction as we prefer. Then we loop over the list of ants to run them all.
+
+```js
+// global
+var ants = [];
+
+  // in setup():
+  ants[0] = {
+    x: floor(columns/2),
+    y: floor(columns/2),
+    direction: 0
+  }
+  ants[1] = {
+    x: floor(columns/2),
+    y: floor(columns/2),
+    direction: 1
+  }
+
+
+  // in draw():
+  for (var i=0; i < ants.length; i++) {
+    var ant = ants[i];
+
+    // put ant cell rule here
+    // put ant move code here
+  }
+
+  // put cells drawing code here
+
+  for (var i=0; i < ants.length; i++) {
+    var ant = ants[i];
+
+    // put ant drawing code here
+  }
+```
+
+
+## Rule 30
 
 ```javascript
 // declare global variables,
