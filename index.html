@@ -72,10 +72,6 @@ footer {
 
 <div style="display: none" id="sourcetext">
 
-**TODO: DELETE THIS ONCE DONE**
-
-[Graham's course pages](http://alicelab.world/digm5950/ca.html)
-
 # Autonomous Complexity in Life and Machines
 
 ![](image/DataAIDesign_Posters-03.jpg)
@@ -264,53 +260,53 @@ _____________________________
 
 # Using P5.js
 
-## Online editors
+> "p5.js is a JavaScript library for creative coding, with a focus on making coding accessible and inclusive for artists, designers, educators, beginners, and anyone else! p5.js is free and open-source because we believe software, and the tools to learn it, should be accessible to everyone. Using the metaphor of a sketch, p5.js has a full set of drawing functionality." -[https://p5js.org/]()
 
-### P5 Editor
+P5.js is a browser-based javascript creative coding platform that inherits most of its design from the Processing language, one of the widely-used creative coding platforms of the last decades, itself directly inspired by John Maeda's "Design By Numbers" project at the MIT Media Lab.
 
-The p5.js Web Editor is an online platform for learning to code in a visual way. Designed for all ages and abilities, anyone can get started quickly creating, editing, and sharing p5.js sketches.  
+To create "sketches" using P5.js, it's convenient to use an online, browser-based editor. There are lots of online javascript editors and previewers available. We like to use the **Codepen** editor, but we'll also introduce the **P5 Editor** as an alternative too.
 
-It is free and open source, no sign up, setup, or download required. Using p5.js you can use JavaScript, HTML, and CSS to create graphics in 2D and 3D, add text, images, video, and audio, and make your sketch interactive with mouse, touch, webcam input, and motion sensing.  
+## Codepen
 
-[p5 editor link](https://editor.p5js.org/)  
+> "CodePen is a playground for the front end side of the web. Need to build a reduced test case to demonstrate and figure out a bug? CodePen is great for that. Want to show off your latest creation and get feedback from your peers? CodePen is great for that. Want to find examples of a particular design pattern for your project? CodePen is great for that." - [codepen.io](https://codepen.io/about/)  
 
-### Codepen
+To use Codepen you need to do two things:
 
-CodePen is a playground for the front end side of the web. Need to build a reduced test case to demonstrate and figure out a bug? CodePen is great for that. Want to show off your latest creation and get feedback from your peers? CodePen is great for that. Want to find examples of a particular design pattern for your project? CodePen is great for that. - [codepen.io](https://codepen.io/about/)  
+1. Make sure you have a good recent web browser to use, such as Firefox or Chrome.
+2. Create a free account: [codepen link](https://codepen.io/)
 
-- Let's create an account. [codepen link](https://codepen.io/)
-	
-- Create a new pen. From the setting located at the top right of the screen, you can add P5.js library. Type "p5" and it should offer a full URL for the p5 library, which you can click to select. Then click save & close.
+To set up a new sketch, or "pen", for this workshop you have two options:
+
+### Option 1: Fork our template pen
+
+- Open the following link in a new browser window: [https://codepen.io/grrrwaaa/pen/LYbgyyx?editors=0010]() 
+- Click on the **Fork** button at the bottom-right to make a new copy of it,
+- Then press **Save** to save it into your account.
+
+### Option 2: Create and configure a new pen
+
+You can create a pen by pressing "Pen" under "Create" on the top left of the main Codepen page.
+
+To work with P5.js we need to add the P5.js library to the pen:
+
+- Open the **Settings** at the top of the screen, and select the **JS** settings. 
+  - Under **Add External Scripts**, find the box with *Search CDNjs* and type "p5". It should offer a full URL for the p5 library, which you can click or press enter to select
+  - Alternatively: You can copy the following address and paste it into the box underneath the one saying *Search CDNjs*: https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.7.2/p5.min.js
+- Click **Save & Close**
 
 ![codepen](image/codepen01.png)  
 
-- Optional: You can check out the latest P5 version from [p5 website](https://cdnjs.com/libraries/p5.js). You can directly copy its address.
+### Quick Test
 
->Example - https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.7.2/p5.min.js
+Let's quickly test to make sure you have it working. 
 
-- Optional: you can disable Auto-Updating Preview under Behavior in the setting box. The Run button will appear at the top right pannel. (Sometimes auto-updating can be distracting or cause the browser to crash due to an infinite loop while you are typing.)
+There are three text boxes in the editor, for entering code in **HTML**, **CSS**, and **JS** (Javascript). We'll only be using the JS box so we can stretch this box to be large to have more space. Paste the following code into the **JS** box:
 
-	- P5 documentation: [https://p5js.org/download/](https://p5js.org/download/)
-	- CODEPEN documentation: [https://blog.codepen.io/documentation/](https://blog.codepen.io/documentation/) 
-	
-- Test coding.
-	- There are three text boxes: HTML, CSS, and JS (JavaScript). Mostly we will only use the JS box to enter code. 
-	- Optional: Add the code below to the CSS box to get rid of scroll bar around your canvas:
-
-```css
-/* these styles remove the space & scrollbars around the canvas */  
-body {margin:0; padding:0;}  
-canvas {display:block;} 		
-```
-
-- Shrink the HTML and CSS boxes to have a bigger space in the JS box. 
-- Test to write the simplest p5 script:
-	
 ```javascript
 function setup() {  
-	// initialize the canvas & graphics state:  
-	createCanvas(windowWidth, windowHeight);  
-	background(128);
+  // initialize the canvas & graphics state:  
+  createCanvas(windowWidth, windowHeight);  
+  background(128);
 }
 ```
 
@@ -320,11 +316,265 @@ function setup() {
   	
 *Yeah~ Successful!*
 
-- You may also want to open the browser console, where any errors will be printed. How to do this depends on what browser you use. E.g. in Chrome, it is under View / Developer > JavaScript Console. In Firefox it is Tools / Web Developer > Browser Console. [For other browsers see here.](https://webmasters.stackexchange.com/questions/8525/how-do-i-open-the-javascript-console-in-different-browsers)
+You may also want to open the browser console, where any errors will be printed. How to do this depends on what browser you use. E.g. in Chrome, it is under View / Developer > JavaScript Console. In Firefox it is Tools / Web Developer > Browser Console. [For other browsers see here.](https://webmasters.stackexchange.com/questions/8525/how-do-i-open-the-javascript-console-in-different-browsers)
+
+### Extra options
+
+- You can copy & paste the following code to the **CSS** box to get rid of borders and scroll bars around your canvas:
+
+```css
+/* these styles remove the space & scrollbars around the canvas */  
+body {margin:0; padding:0;}  
+canvas {display:block;} 		
+```
+
+- You can disable Auto-Updating Preview under Behavior in the **Settings** box. The Run button will appear at the top right pannel. (Sometimes auto-updating can be distracting, and manually pressing Run can be better.)
+
+- To know more Codepen options see the [Codepen documentation](https://blog.codepen.io/documentation/) 
+
+### P5 Editor
+
+As an alternative to Codepen you can use the p5.js Web Editor. It is free and open source, no sign up, setup, or download required: [p5.js Web Editor](https://editor.p5js.org/)  
+
+## P5.js
+
+- P5 documentation: [https://p5js.org/download/](https://p5js.org/download/)
+	
+Generally, a P5.js script will have these main sections:
+
+```js
+// Global declarations
+// declare global variables that can be used in any function
+// and persist through the program's lifetime
+
+// setup() runs once when the program starts
+// use it to define the canvas
+// and initialize the global state
+function setup() {
+  // create a p5.js canvas that fills the available area:
+  canvas = createCanvas(windowWidth, windowHeight);
+  // do other initialization here
+}
+
+// the draw() function is called repeatedly
+// about 60 times a second (if the computer is fast enough)
+function draw() {
+  // do animated drawing here
+}
+```
 
 _____________________________
 
-### Conway's Game of Life
+## Game of Life
+
+To draw the Game of Life, we'll need to draw black and white squares. Here's the P5 code fragments we'll need:
+
+- Set up drawing style:
+  - `background(0) // black background`
+  - `noStroke() // don't draw borders around shapes`
+- Set a colour and draw a square (in pixels)
+  - `fill(255) // white`
+  - `fill(0) // black`
+  - `cell_size = 8 // (global) cell size in pixels`
+  - `rect(10, 20, cell_size, cell_size) // x, y, width, height`
+
+The next thing we need to know is how many rows and columns of cells there should be.
+If the `cell_size` is 8, then the number of columns is the `width` of the canvas divided by 8. And similarly, the number of rows is `height/cell_size`. 
+
+We need to use `rows` and `columns` everywhere in the script, so we have to declare them in the global section at the start, but we can't actually set their values until we have created the canvas (because until that point, we don't know how big the canvas is), so that part has to go into `setup()`:
+
+```js
+// global declarations
+var cell_size = 8;  // (global) cell size in pixels
+var rows;           // determined in setup()
+var columns;        // determined in setup()
+
+function setup() {
+  // create a p5.js canvas that fills the available area:
+  canvas = createCanvas(windowWidth, windowHeight);
+  // creating the canvas defines `width` and `height`
+  // use this to figure out how many rows & columns we have:
+  rows = width / cell_size;
+  columns = height / cell_size;
+}
+```
+
+Let's try drawing a random cell. 
+
+P5.js has a function called `random(n)` which will give you a random number from 0 to `n`. However this number will have a decimal part (programmers call this a "floating point" number). If we want a whole number (what programmers call an "integer"), we have to round it down. We can do that using `floor()`. So, to pick a random row and column:
+
+```js
+var r = floor(random(rows));
+var c = floor(random(columns));
+```
+
+In the Game of Life a cell can either be dead (value is zero) or alive (value is one), which we can call the state. To draw white in P5.js we need to set `fill(255)` so we can do this from a cell state, and draw our cell, like this:
+
+```js
+var r = floor(random(rows));
+var c = floor(random(columns));
+var state = floor(random(2)); // 0 or 1, dead or alive
+fill(state * 255); // 0 or 255, black or white
+// draw rect at x, y, width, height:
+rect(r * cell_size, c * cell_size, cell_size, cell_size);
+```
+
+> Try putting this code into the `draw()` function rather than in `setup()`!
+
+What if we want to fill the *entire* field all at once, rather than frame by frame? We'll need to **loop** over each row, and for each one, again **loop** over each column, to set each cell in turn:
+
+```js
+for (let r = 0; r < rows; r++) {
+  for (let c = 0; c < columns; c++) {
+    var state = floor(random(2)); // 0 or 1, dead or alive
+    fill(state * 255); // 0 or 255, black or white
+    // draw rect at x, y, width, height:
+    rect(r * cell_size, c * cell_size, cell_size, cell_size);
+  }
+}
+```
+
+---
+
+The next step is to add **memory**. The state of the cells in one frame depends on the state of the cells on the frame before (through the neighbourhood). So we need a way to setup the states of cells initially, and use those states on every frame. In Javascript we can create lists (using `[]`) which programmers call "Arrays". We can create a list of rows, where each row is another list of all the cell states. The game is a list of lists.
+
+```js
+// global declarations
+// cells is defined as an empty array
+// (this will become a "2D" array -- an array of arrays):
+let cells = [];
+
+function setup() {
+  //...
+
+  for (let r = 0; r < rows; r++) {
+    // create a new row (array of arrays):
+    cells[r] = [];
+    // for each column in this row:
+    for (let c = 0; c < columns; c++) {
+      // create a new cell
+      // state is either 0 or 1
+      cells[r][c] = floor(random(2));
+    }
+  }
+}
+
+function draw() {
+  // loop over the rows & columns of the cells
+  // to draw each one
+  for (let r = 0; r < rows; r++) {
+    for (let c = 0; c < columns; c++) {
+      // get the state of this location in the cells array:
+      let cell = cells[r][c];
+      // scale state (0,1) up to greyscale range (0,255):
+      fill(cell * 255);
+      // draw a box at this cell's location and size:
+      rect(c * cell_size, r * cell_size, cell_size, cell_size);
+    }
+  }
+}
+```
+
+--- 
+
+We are **almost** ready now to insert the Game of Life rules. But there's a catch. The states of the whole grid must update synchronously. That means: when one cell changes, all cells should change. This is not easy to achieve in most computing systems today, which mostly follow instructions one at a time (with only limited parallelism). A naive implementation will thus update cells one at a time, and the neighborhood of a particular cell will contain both 'past' and 'future' states. One way to work around this is to maintain two copies of the grid; one for the 'past' states, and one for the 'future' states. The transition rule always reads from the 'past' lattice, and always writes to the 'future' lattice. After all cells are updated, the 'future' grid is copied to the 'past' grid, since the future of yesterday is the past of tomorrow.
+
+> This technique is called double-buffering, and is widely used in software systems where a parallel process interacts with a serial machine. It is used to render graphics to the screen, for example.
+
+To do this in our script, we just add a second array, which we can call `newcells`:
+
+
+```js
+// global declarations
+// cells is defined as an empty array
+// (this will become a "2D" array -- an array of arrays):
+let cells = [];
+// we also need a second 2D array for the next generation
+// (at each frame we calculate new cell values and store them in newcells
+// and then swap cells and newcells for the next frame)
+let newcells = [];
+
+function setup() {
+  //...
+
+  for (let r = 0; r < rows; r++) {
+    // create a new row (array of arrays):
+    newcells[r] = [];
+    cells[r] = [];
+    // for each column in this row:
+    for (let c = 0; c < columns; c++) {
+      // create a new cell
+      // state is either 0 or 1
+      newcells[r][c] = floor(random(2));
+      // make sure to also create the old cells:
+      cells[r][c] = 0
+    }
+  }
+}
+
+function draw() {
+  // loop over the rows & columns of the cells
+  // to draw each one
+  for (let r = 0; r < rows; r++) {
+    for (let c = 0; c < columns; c++) {
+      // get the state of this location in the cells array:
+      let cell = newcells[r][c];
+      // scale state (0,1) up to greyscale range (0,255):
+      fill(cell * 255);
+      // draw a box at this cell's location and size:
+      rect(c * cell_size, r * cell_size, cell_size, cell_size);
+      // update the old cells array with the new cell value:
+      // (if we didn't do this, the CA would not continuously update)
+      cells[r][c] = cell;
+    }
+  }
+}
+```
+
+----
+
+Now, finally, we have everything we need to add the Game of Life. On every frame (that is, in `draw()`), we want to loop over each cell of `newcells` and set its new state according to the states of that location, and its neightbours, in the older `cells` array. That means another loop of loops over the grid.
+
+For the cell at `cells[r][c]`, the neighbour to the West is `cells[r-1][c]`, and so on for East, North, South, etc.
+
+```js
+// get each of the neighbouring cells (from the previous generation):
+let N  = cells[r-1][c  ];
+let S  = cells[r+1][c  ];
+let W  = cells[r  ][c-1];
+let E  = cells[r  ][c+1];
+let NE = cells[r-1][c+1];
+let SE = cells[r+1][c+1];
+let NW = cells[r-1][c-1];
+let SW = cells[r+1][c-1];
+```
+
+We need to be careful though: when `r` is 0, then the neighbour location to the left would be `-1`, and there's no neighbour there. So we need some special handling to take care of those **boundary** cases. Probably the easiest solution is to say that all boundary cells are always dead, or never change, or always randomize:
+
+```js
+if (c <= 0 || c >= columns - 1 || r <= 0 || r >= rows - 1) {
+  // some options:
+  // let border cells be always dead
+  newcells[r][c] = 0;
+  // or, let border cells stay the same
+  //newcells[r][c] = cell;
+  // or, let border cells be always randomized:
+  //newcells[r][c] = floor(random(2));
+} else {
+  // get each of the neighbouring cells (from the previous generation):
+  let cell = cells[r][c];
+  let N  = cells[r-1][c  ];
+  let S  = cells[r+1][c  ];
+  let W  = cells[r  ][c-1];
+  let E  = cells[r  ][c+1];
+  let NE = cells[r-1][c+1];
+  let SE = cells[r+1][c+1];
+  let NW = cells[r-1][c-1];
+  let SW = cells[r+1][c-1];
+  //...
+}
+```
+Now, finally, we can compute the number of living neighbours, and use this to implement the Game of Life rules to update `newcells[r][c]` accordingly:
 
 - If the current state is 1 ("alive"):
 	- If the neighbor total is less than 2: New state is 0 ("death by loneliness")
@@ -475,8 +725,9 @@ function draw() {
 
 - [The Game of Life - The Nature of Code by The coding train.](https://www.youtube.com/watch?v=tENSCEO-LEc)  	
 	
+---
 
-### Langton's Ant
+## Langton's Ant
 
 >A cellurar space (a 2D grid) of black or white cells is inhabited by one or more ants
 these ants face one of four possible directions (north, east, south, or west)
