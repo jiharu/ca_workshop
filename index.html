@@ -111,10 +111,23 @@ _____________________________
 
 # Cellular Automata
 
+The question, "what is life?", may have been easy to answer a long time ago, but not anymore. Once we believed that if we could see the smallest components of life, down to the microscopia, we would understand life. But, what we found is that life & non-life were basically made of the same stuff.
+
+The only difference seems to be in how they are organized (or, rather, how they organize themselves). Life tends to slow down physical processes of entropy, and **complexify** itself into highly unlikely structures and behaviours, by copying and rewriting itself as it interacts with a dynamic environment. In the words of computing pioneer John von Neumann: *"life is a process which can be abstracted away from any particular medium."* And if so, there is no reason to suppose that living systems cannot occur in media that are not part of our natural evolution, including digital media.
+
+**Artificial Life** examines systems related to life, its processes, and its evolution, through the use of simulations with computer models, robotics, and human-made biochemistry. The discipline was named and founded in the 1980's by Christopher Langton. Aspects of Artificial Life research recur in AI, Complexity Science, Bioinformatics, Synthetic Biology, Computer Graphics, Computer-Aided Design and Architecture, etc. 
+
+Rather than taking a specific system and investigating its prinicpal features top-down, Artificial Life tends to work through **bottom-up** approaches, creating simulations in which complex behaviours or other **emergent phenomena** arise from:
+
+- a simple set of rules, and
+- a population that follows those rules
+
+Results are emergent in that they are not explicable, or predictable, from the rules themselves -- to some extent they go beyond the author of the system. These characteristics have deep natural synergies with the practices of **Generative Art**.
+
+But the earliest examples of Artifiical Life predate computing machinery. The idea of a **Cellular Automaton** was first proposed by Stanislav Lem to von Neumann in the 1940's as a way to investigate how life may emerge from non-life, and von Neumann used it to demonstrate that an abstract machine could construct something more complex than itself in the same way that living systems can.
+
 ## Conway's Game of Life, 1970
-
-### Rule
-
+22
 The most famous CA is probably the Game of Life. It is a 2D automata, which uses a neighbourhood of 8 neighbours, and synchronous update. The transition rule can be stated as follows:
 
 - If the current state is 1 ("alive"):
@@ -129,9 +142,24 @@ The Game of Life produces easily recognizable higher-level formations including 
 
 ### Videos
 
-- [Stephen Hawkings The Meaning of Life (John Conway's Game of Life segment), 3:29](https://www.youtube.com/watch?v=CgOcEZinQ2I&t=2s)  
+Does John Conway hate his Game of Life?, 6:53
 
-- [Does John Conway hate his Game of Life?, 6:53](https://www.youtube.com/watch?v=E8kUJL04ELA&feature=youtu.be) 	
+---youtube:E8kUJL04ELA
+
+[An homage in the NY Times](https://www.nytimes.com/2020/12/28/science/math-conway-game-of-life.html)
+
+Stephen Hawkings The Meaning of Life (John Conway's Game of Life segment), 3:29:
+
+---youtube:CgOcEZinQ2I
+
+Computational universality: Turing Machine in the Game of Life:
+
+---youtube:My8AsV7bA94
+
+Game of Life in Game of life
+
+---youtube:xP5-iIeKXE8
+
 		
 
 ## Essential CA components
@@ -191,6 +219,24 @@ Wolfram divided CA into four classes, according to their long-term behavior:
 - **Class 4:** Evolve to complex patterns of localized structures with long transients.  
  
 Conway’s Game of Life is a class 4 CA. 
+
+## Beyond the Game of Life
+
+---youtube:ISQChKRH4NI
+
+[SmoothLife](http://www.youtube.com/playlist?list=PL69EDA11384365494) uses a discrete grid, but all of states, kernel, and transition functions are adjusted for smooth, continuous values. A disc around a cell's center is integrated and normalized (i.e. averaged) for the cell's state, and a ring surrounding this is integrated & normalized (averaged) for the neighbor state. Cell transition functions are expressed in terms of continuous sigmoid thresholds over the [0, 1] range, and re-expressed in terms of differential functions (velocities of change) to approximate continuous time. [Paper here](http://arxiv.org/pdf/1111.1567v2.pdf). By doing so, it removes the discrete bias and leads to fascinating results. [Another implementaton](http://www.youtube.com/watch?v=l7t8LtdBAV8). [Taken to 3D](http://www.youtube.com/watch?v=zA857JdUn9o&list=PL69EDA11384365494&index=46). In effect, by making all components continuous, it is essentially a simulation of differential equations. [Here is a great explanation of the SmoothLife implementation, with a jsfiddle demo](http://0fps.net/2012/11/19/conways-game-of-life-for-curved-surfaces-part-1/)
+
+
+### Lenia
+
+Lenia continues in the spirit of SmoothLife, and has been extensively explored & documented to identify over 400 different organisms, occuping distict environmental niches (different physical constants), with various locomotive patterns catalogued, etc.
+
+<iframe src="https://player.vimeo.com/video/277328815" width="640" height="360" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+
+- [Paper](https://arxiv.org/abs/1812.05433)
+- [Code](https://github.com/Chakazul/Lenia)
+- [Winner in Virtual Creatures Contest, GECCO 2018, Kyoto](https://virtualcreatures.github.io/)
+- [Honorable Mention in ALife Art Award, ALIFE 2018, Tokyo.](http://artaward2018.alifelab.org/)
 
 ----
 
@@ -1054,6 +1100,8 @@ function rule(left, center, right) {
   
   var source = document.getElementById("sourcetext").innerText;
   source = source.replace(/\n---codepen:https?:\/\/codepen.io\/+([^\/]+)\/pen\/([^\/\n]+)\/?/g, '<p class="codepen" data-height="520" data-default-tab="js,result" data-user="$1" data-slug-hash="$2" data-preview="true"><span><a href="https://codepen.io/$1/pen/$2">Open pen.</a></span></p>');
+
+  source = source.replace(/\n---youtube:([^\s]+)/g, '<iframe width="720" height="540" src="https://youtube.com/embed/$1" frameborder="0" allowfullscreen></iframe>');
 
   var html = marked(source);
 
